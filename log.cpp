@@ -28,3 +28,49 @@ void LogPrintf(const char* msg, ...)
     va_end(argptr);
   }
 }
+
+void set_ini()
+{
+  CString temp = "set.ini";
+  WIN32_FIND_DATA d;
+  HANDLE hd = FindFirstFile(temp, &d);
+  if(!hd)
+  {
+    //FindClose
+    return;
+  }
+  mMaxSize = 256;//随意了
+  int UserCard[mMaxsize];
+  char* re = new char[mMaxSize + 1];
+  ZeroMemory(re, mMaxSize);
+  //GetPrivateProfileInt(secName,KeyName,IpDefault, IpFileName);
+  //GetPrivateProfileString(...);
+  CString key = TEXT("Game(或其它标题符号)")；
+  CString byCard;
+  
+  GetPrivateProfileString(key, "text", "", byCard, mMaxszie, temp);
+  int temp_size = 0;
+  int tempj = 0;
+  int suoyini = -1;
+  int suoyinj = 0;
+  temp_size = byCard.GetLength();
+  
+  for(int j = 0; j <= temp_size; j++)
+  {
+    if(byCard[j] >= '0' && byCard[j] <= '9')
+    {
+      if(suoyini == -1)
+      {
+        suoyini = j;
+      }
+    }
+    else
+    {
+      suoyinj = j;
+      UserCard[tempj++] = atoi(byCard.Mid(suoyini, suoyinj - suoyini));
+      suoyini = -1;
+    }
+    if(tempj >= mMaxsize)
+      break;
+  }
+}
