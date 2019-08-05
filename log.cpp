@@ -74,3 +74,13 @@ void set_ini()
       break;
   }
 }
+
+void SetKeyString()
+{
+  CString temp = "set.ini";
+  CString key = TEXT("Game(或其它标题符号)")；
+  __int64 temp_number=a-b;
+  //WritePrivateProfileString(secName,keyName,Val,IpFileName);
+  WritePrivateProfileString(key, "resetrobothavewinmoney",temp_number, temp);
+  
+}
